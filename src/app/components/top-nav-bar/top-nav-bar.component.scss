@@ -1,0 +1,17 @@
+/* top-nav-bar.component.scss */
+:host {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+
+    p {
+        margin: 0;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+    }
+}

@@ -1,0 +1,143 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.calendar {
+  width: 100%;
+}
+
+.calendar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+  margin-top: 16px;
+
+  h2 {
+    font-size: 24px;
+  }
+}
+
+.calendar-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  width: 100%;
+
+  .calendar-day {
+    border: 1px solid #ddd;
+    padding: 10px;
+    list-style-type: none;
+    min-height: 100px;
+    background-color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
+
+    &.current-day {
+      background-color: #e0f7fa;
+    }
+  }
+}
+
+.calendar-day cdk-drop-list {
+  min-height: 50px;
+}
+
+.calendar-day ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.calendar-day li {
+  margin: 4px 0;
+}
+
+.calendar-day li, .cdk-drag-preview {
+  padding: 5px;
+  background-color: #49569d;
+  cursor: move;
+  border-radius: 4px;
+  color: white;
+  list-style-type: none;
+
+  span {
+    display: flex;
+    font-size: .7rem;
+    opacity: .75;
+  }
+}
+
+.appointment-actions {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+
+  button {
+    padding: 4px 0;
+    line-height: 22px;
+  }
+}
+
+.cdk-drag-preview {
+  box-shadow: 0 5px 5px -3px rgba(0,0,0,0.2);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.calendar-day-view {
+
+  .hour-slot {
+    border-top: 1px solid #ddd;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+
+    &:last-child {
+      border-bottom: 1px solid #ddd;
+    }
+
+    .hour-label {
+      width: 50px;
+      text-align: right;
+      margin-right: 10px;
+      font-weight: bold;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      flex: 1;
+
+      li {
+        background: #49569d;
+        color: white;
+        margin: 2px 0;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: move;
+      }
+    }
+  }
+}

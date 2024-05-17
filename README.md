@@ -1,6 +1,8 @@
-# CalendarNg
+# Appointly
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
+
+Appointly is a powerful appointment scheduling application built with Angular. It allows users to manage their appointments, schedule new appointments, and view their upcoming appointments. With a user-friendly interface, Appointly simplifies the appointment management process for businesses and individuals alike.
 
 ## Development server
 

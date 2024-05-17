@@ -1,0 +1,76 @@
+<div class="calendar">
+  <div class="calendar-actions">
+    <button mat-raised-button color="primary" routerLink="/add-appointment">
+      <mat-icon>alarm_add</mat-icon>
+      Add appointment
+    </button>
+    <mat-button-toggle-group [(ngModel)]="isDailyView">
+      <mat-button-toggle [value]="false">Monthly View</mat-button-toggle>
+      <mat-button-toggle [value]="true">Daily View</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div class="calendar-header">
+    <button mat-icon-button (click)="moveMonth(-1)" *ngIf="!isDailyView">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <button mat-icon-button (click)="moveDay(-1)" *ngIf="isDailyView">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <h2>{{ currentMonth }} {{ currentYear }} <span *ngIf="isDailyView">- {{ currentDate | date:'fullDate' }}</span></h2>
+    <button mat-icon-button (click)="moveMonth(1)" *ngIf="!isDailyView">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+    <button mat-icon-button (click)="moveDay(1)" *ngIf="isDailyView">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+  <div class="calendar-body" cdkDropListGroup *ngIf="!isDailyView">
+    <div *ngFor="let day of days; let i = index" 
+         cdkDropList 
+         [cdkDropListData]="day.appointments"
+         [id]="i.toString()"
+         (cdkDropListDropped)="drop($event)"
+         class="calendar-day"
+         [ngClass]="{'current-day': day.isToday}"
+         tabindex="0"
+         (keydown.enter)="openAddAppointment(day.date)"
+         (click)="openAddAppointment(day.date)">
+      <div>{{ day.date.getDate() }}</div>
+      <ul>
+        <li *ngFor="let appointment of day.appointments" 
+            cdkDrag 
+            [cdkDragData]="appointment">
+          <span>{{ appointment.time }}</span>
+          {{ appointment.title }}
+          <div class="appointment-actions">
+            <button mat-icon-button (click)="deleteAppointment(appointment); $event.stopPropagation()">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="calendar-day-view" cdkDropListGroup *ngIf="isDailyView">
+    <div *ngFor="let hour of hours" class="hour-slot"
+         cdkDropList
+         [cdkDropListData]="getAppointmentsForHour(hour)"
+         [id]="'hour-' + hour.toString()"
+         (cdkDropListDropped)="dropInDailyView($event, hour)">
+      <div class="hour-label">{{ hour }}:00</div>
+      <ul>
+        <li *ngFor="let appointment of getAppointmentsForHour(hour)"
+            class="hour-slot-appointment"
+            cdkDrag 
+            [cdkDragData]="appointment">
+          {{ appointment.title }}
+          <div class="appointment-actions">
+            <button mat-icon-button (click)="deleteAppointment(appointment); $event.stopPropagation()">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
